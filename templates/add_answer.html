@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h3>{{ question[0]['title'] }}</h3>
+    <p>{{ question[0]['message'] }}</p>
+    <form method="post" enctype="multipart/form-data" class="form-horizontal">
+        <div class="form-group">
+
+        <input name="question_id" hidden value="{{ question[0]['id'] }}"><br>
+        <label for="message" >Message</label><br>
+        <textarea name="message" class="form-control input-sm" required placeholder="Message"></textarea><br>
+        <label for="image">Attach an image</label><br>
+        <input type="file" name="image" class="btn btn-default">
+        <button type="submit" class="btn btn-primary">Add answer</button>
+        </div>
+    </form>
+{% endblock content %}

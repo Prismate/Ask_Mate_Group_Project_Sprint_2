@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div style="display: inline">{{ title }}</div>
+    <div id="sort_params">
+        <label>Order by:
+            <select name="sort_key" id="sort_key">
+                <option value="submission_time">Submission time</option>
+                <option value="title">Title</option>
+                <option value="message">Message</option>
+                <option value="vote_number">Vote_number</option>
+            </select>
+        </label>
+    </div>
+    <table class="table">
+
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>
+                    <div class="question_title">
+                        <a href="/question/{{ question['id'] }}">{{ question['title'] }}</a>
+                    </div>
+                </td>
+
+                <td>
+                    <div id="actions">
+                        <button type="button" title="Edit" class="btn btn-sm btn-outline-primary action_button mb-1"
+                                onclick="window.location.href='/question/{{ question['id'] }}/edit'">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <form action="/question/{{ question['id'] }}/delete" method="post">
+                            <button type="submit" title="Delete"
+                                    class="btn btn-sm btn-outline-primary action_button mb-1">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                        <form action="/question/{{ question['id'] }}/vote-up" method="post">
+                            <button type="submit" title="Vote Up"
+                                    class="btn btn-sm btn-outline-primary action_button mb-1">
+                                <i class="fa fa-thumbs-up"></i>
+                            </button>
+                        </form>
+                        <form action="/question/{{ question['id'] }}/vote-down" method="post">
+                            <button type="submit" title="Vote Down"
+                                    class="btn btn-sm btn-outline-primary action_button mb-1">
+                                <i class="fa fa-thumbs-down"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="question_message">{{ question['message'] }}</div>
+                </td>
+                <td>
+                    {% if question['image'] %}
+                        <img src="{{ url_for('static', filename='images/'+ question['image']) }}" class="question_image"
+                             height="auto"/>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="question_tags">tags:
+                    {% for tag in question['tags'] %}
+                        <span class="badge badge-pill badge-primary">{{ tag['name'] }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr class="question_stats">
+                <td colspan="2">
+                    Added by <a href="">USER</a> on: {{ question['submission_time'] }}
+                    <div id="question_votes">
+                        Views: {{ question['view_number'] }} / Votes: {{ question['vote_number'] }} / <a
+                            href="">Comments</a>: {{ question['comments'] }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-sm btn-outline-primary btn-custom-width mb-1"
+            onclick="window.location.href='/add-question'">
+        <i class="fa fa-comment"></i>Add question
+    </button>
+
+{% endblock content %}
+
+
+
+

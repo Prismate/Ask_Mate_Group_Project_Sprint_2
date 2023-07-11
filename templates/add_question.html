@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data" class="form-horizontal">
+        <div class="form-group">
+            <label for="title">Title</label><br>
+            <input name="title" class="form-control input-sm" required placeholder="Title"><br>
+            <label for="message">Message</label><br>
+            <textarea name="message" class="form-control input-sm" required placeholder="Message"></textarea><br>
+            <label for="image">Attach an image</label><br>
+            <input type="file" name="image" class="btn btn-default"><br>
+            <button type="submit" class="btn btn-primary">Add question</button>
+        </div>
+    </form>
+{% endblock content %}

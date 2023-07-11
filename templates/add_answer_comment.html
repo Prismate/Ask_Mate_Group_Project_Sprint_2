@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>{{ answer[0]['message'] }}</h2>
+    <form method="post" enctype="multipart/form-data" class="form-horizontal">
+        <div class="form-group">
+            <input name="question_id" class="form-control input-sm" required placeholder="ID" hidden value="{{ question[0]['id'] }}"></input>
+            <input name="id" class="form-control input-sm" required placeholder="ID" hidden value="{{ answer[0]['id'] }}"></input>
+            <label for="message">Comment</label><br>
+            <textarea name="message" class="form-control input-sm" required placeholder="Message"></textarea><br>
+            <button type="submit" class="btn btn-primary">Save comment</button>
+        </div>
+    </form>
+{% endblock content %}
